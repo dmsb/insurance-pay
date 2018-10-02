@@ -1,10 +1,10 @@
-import { InsurancepayModule } from './insurancepay.module';
+import { InsurancePayModule } from './insurance-pay.module';
 
 describe('InsurancepayModule', () => {
-  let insurancepayModule: InsurancepayModule;
+  let insurancepayModule: InsurancePayModule;
 
   beforeEach(() => {
-    insurancepayModule = new InsurancepayModule();
+    insurancepayModule = new InsurancePayModule();
   });
 
   it('should create an instance', () => {

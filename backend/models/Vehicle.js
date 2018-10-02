@@ -6,7 +6,8 @@ let Vehicle = new Schema({
     brand: String,
     fabricationDate: Date,
     modelYear: Date,
-    model: String
+    model: String,
+    insurancePrice: Number
 }, { collection: 'vehiclecollection' });
 
 export default mongoose.model('Vehicle', Vehicle);
