@@ -51,11 +51,10 @@ router.route('/vehicles/update/:id').put((req, res) => {
         if (!vehicle)
             return next(new Error('Could not load document'));
         else {
-            vehicle.title = req.body.title;
-            vehicle.responsible = req.body.responsible;
-            vehicle.description = req.body.description;
-            vehicle.severity = req.body.severity;
-            vehicle.status = req.body.status;
+            vehicle.brand = req.body.brand;
+            vehicle.fabricationDate = req.body.fabricationDate;
+            vehicle.modelYear = req.body.modelYear;
+            vehicle.model = req.body.model;
 
             vehicle.save().then(vehicle => {
                 res.json('Update done');
