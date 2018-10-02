@@ -12,23 +12,76 @@
 <body>
     <app-header></app-header>
     <div class="parallax-container">
+
+        <div class="parallax"><img src="../assets/img/homem-branco-carro.jpg"></div>
+    </div>
+    <div class="section white">
         <div class="container">
+            <div class="row">
+                <div class="col s12 offset-s4"><span class="flow-text">Vehicle Section</span></div>
+            </div>
             <div class="row">
                 <form class="col s12">
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="first_name" type="text" class="validate">
-                            <label for="first_name">First Name</label>
+                            <input id="vehicle_brand" type="text" class="validate">
+                            <label for="vehicle_brand">Vehicle Brand</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" type="text" class="validate">
-                            <label for="last_name">Last Name</label>
+                            <input id="vehicle_model" type="text" class="validate">
+                            <label for="vehicle_model">Vehicle Model</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="vehicle_fabrication_date" type="text" class="datepicker">
+                            <label for="vehicle_fabrication_date">Vehicle Fabrication Date</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="vehicle_model_year" type="number" class="validate">
+                            <label for="vehicle_model_year">Vehicle Model Year</label>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        <div class="parallax"><img src="../assets/img/homem-branco-carro.jpg"></div>
+    </div>
+    <div class="parallax-container">
+        <div class="parallax"><img src="../assets/img/mulher-indiana-carro.jpg"></div>
+    </div>
+    <div class="section white">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 offset-s4"><span class="flow-text">Choose a Insurance Company</span></div>
+            </div>
+            <div class="row">
+                <form class="col s12">
+                    <table class="cotations">
+                        <thead>
+                            <tr>
+                                <th>Insurance Company</th>
+                                <th>CNPJ</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Price</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let vehicleCotation of vehicleCotations">
+                                <td>{{vehicleCotation.insuranceCompany.fantasyName}}</td>
+                                <td>{{vehicleCotation.insuranceCompany.cnpj}}</td>
+                                <td>{{vehicleCotation.insuranceCompany.email}}</td>
+                                <td>{{vehicleCotation.insuranceCompany.phone}}</td>
+                                <td>{{vehicleCotation.price}}</td>
+                                <td><a class="waves-effect waves-light btn">Pay</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
     </div>
     <app-footer></app-footer>
 </body>
