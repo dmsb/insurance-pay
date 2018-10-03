@@ -1,9 +1,6 @@
-import { Identification } from "./Identification";
-import { Vehicle} from "./Vehicle";
-import { InsuranceCompany } from "./InsuranceCompany";
-
-export class VehicleQuotation extends Identification {
-    vehicle: Vehicle;
-    insuranceCompany: InsuranceCompany;
+export class VehicleQuotation {
+    brand: String;
+    modelYear: Number;
+    model: String;
     price: Number;
 }

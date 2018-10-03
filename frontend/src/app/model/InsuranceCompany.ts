@@ -1,4 +1,5 @@
 import { Identification } from "./Identification";
+import { VehicleQuotation } from "./VehicleQuotation";
 
 export class InsuranceCompany extends Identification {
     fantasyName: String;
@@ -19,5 +20,8 @@ export class InsuranceCompany extends Identification {
     directorZipCode: String;    
     directorCity: String;
     directorState: String;
-    directorCountry: String
+    directorCountry: String;
+    fabricationMonthYearPercentage: Number;
+    vehicleQuotations: VehicleQuotation[];
+
 }

@@ -1,6 +1,4 @@
-import { Identification } from "./Identification";
-
-export class Vehicle extends Identification {
+export class Vehicle {
     brand: string;
     fabricationDate: Date;
     modelYear: Date;
