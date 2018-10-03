@@ -1,0 +1,92 @@
+db.getCollection("insurance_company").insert({ 
+  	"fantasyName" : "Company 1", 
+  	"email" : "company1@gmail.com",
+    "phone": "5581993566788",
+    "headOfficeCity": "Recife",
+    "neighborhood": "Jordão",
+    "zipcode": "77060814",
+    "state": "PE",
+    "cnpj": "64467552000197",
+    "stateRegistration": "AA4568",
+    "directorName": "Diogo",
+    "directorNationality": "Brasileiro",
+    "directorMaritalState": "Solteiro",
+    "directorProfission": "Empresário",
+    "directorRg" : "551155668",
+    "directorCpf" : "36082404033",
+    "directorZipCode": "77060814",
+    "directorCity": "Recife",
+    "directorState": "PE",
+    "directorCountry": "Brasil",
+    "fabricationMonthYearPercentage": 1,
+    "vehicleQuotations": [
+        { 
+            "brand" : "FIAT",
+            "modelYear" : 2005,
+            "plate" : "PPO5862",
+            "model" : "UNO MILE FIRE",
+            "price" : 500.35 
+        },
+        {
+            "brand" : "KIA",
+            "modelYear" : 2009,
+            "plate" : "ABC3215",
+            "model" : "Sport",
+            "price" : 778.95
+        }
+    ]
+});
+
+db.getCollection("insurance_company").insert({ 
+  	"fantasyName" : "Company 2", 
+  	"email" : "company2@gmail.com",
+    "phone": "5581993566788",
+    "headOfficeCity": "Recife",
+    "neighborhood": "Jordão",
+    "zipcode": "77060814",
+    "state": "PE",
+    "cnpj": "64467552000197",
+    "stateRegistration": "AA4568",
+    "directorName": "Diogo",
+    "directorNationality": "Brasileiro",
+    "directorMaritalState": "Solteiro",
+    "directorProfission": "Empresário",
+    "directorRg" : "551155668",
+    "directorCpf" : "36082404033",
+    "directorZipCode": "77060814",
+    "directorCity": "Recife",
+    "directorState": "PE",
+    "directorCountry": "Brasil",
+    "fabricationMonthYearPercentage": 2,
+    "vehicleQuotations": [
+        {
+            "brand" : "FIAT",
+            "modelYear" : 2005,
+            "plate" : "PPO5862",
+            "model" : "UNO MILE FIRE",
+            "price" : 600.12
+        },
+        {
+            "brand" : "KIA",
+            "modelYear" : 2009,
+            "plate" : "ABC3215",
+            "model" : "Sport",
+            "price" : 862.64
+        }
+    ]
+});
+
+###
+db.insurance_company.find( 
+{ "vehicle_quotations.brand": "FIAT" }, 
+{ "fantasyName" : 1,
+  "email" : 1,
+  "phone": 1,
+  "headOfficeCity": 1,
+  "neighborhood": 1,
+  "zipcode": 1,
+  "state": 1,
+  "cnpj": 1,
+  "stateRegistration": 1,
+  "vehicle_quotations.$meta": 1 } )
+

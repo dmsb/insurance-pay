@@ -5,4 +5,5 @@ export class Vehicle extends Identification {
     fabricationDate: Date;
     modelYear: Date;
     model: string;
+    plate: string;
 }

@@ -1,11 +1,11 @@
 import { Identification } from "./Identification";
-import { VehicleCotation } from "./VehicleCotation";
+import { VehicleQuotation } from "./VehicleQuotation";
 
 export class InsuranceContract extends Identification {
     deadLineForAccidents: Number;
     contractCoverageInMonths: Number;
 
-    vehicleCotation: VehicleCotation;
+    vehicleCotation: VehicleQuotation;
 
     policyHolderFullName: String;
     policyHolderRg: String;

@@ -1,8 +1,35 @@
 import mongoose from 'mongoose';
-import Vehicle from './Vehicle';
-import InsuranceCompany from './InsuranceCompany';
 
 const Schema = mongoose.Schema;
+
+let InsuranceCompany = new Schema({
+    fantasyName: String,
+    email: String,
+    phone: String,
+    headOfficeCity: String,
+    neighborhood: String,
+    zipcode: String,
+    state: String,
+    cnpj: String,
+    stateRegistration: String,
+    directorName: String,
+    directorNationality: String,
+    directorMaritalState: String,
+    directorProfission: String,
+    directorRg: String,
+    directorCpf: String,
+    directorZipCode: String,    
+    directorCity: String,
+    directorState: String,
+    directorCountry: String
+});
+
+let Vehicle = new Schema({
+    brand: String,
+    modelYear: Date,
+    model: String,
+    plate: String
+});
 
 let InsuranceContract = new Schema({
     insuranceCompany: InsuranceCompany,
@@ -10,6 +37,7 @@ let InsuranceContract = new Schema({
     
     deadLineForAccidents: Number,
     contractCoverageInMonths: Number,
+    price: Number,
 
     policyHolderFullName: String,
     policyHolderRg: String,
@@ -35,6 +63,6 @@ let InsuranceContract = new Schema({
     policyHolderHomeType: String, 
     policyHolderProfession: String
 
-}, { collection: 'insurancecontractcollection' });
+}, { collection: 'insurance_contract' });
 
 export default mongoose.model('InsuranceContract', InsuranceContract);

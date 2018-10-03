@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-import Vehicle from './models/Vehicle';
+import InsuranceCompany from './models/InsuranceCompany';
 
 const app = express();
 const router = express.Router();
@@ -17,7 +17,33 @@ connection.once('open', () => {
     console.log('MongoDB database connection established successfully!');
 });
 
-router.route('/vehicles').get((req, res) => {
+//http://localhost:4000/insurance_companies?brand=FIAT&model=UNO MILE FIRE&modelYear=2005
+router.route('/insurance_companies').get((req, res) => {
+    InsuranceCompany.find({ 
+        'vehicleQuotations.brand' : req.query.brand,
+        'vehicleQuotations.model' : req.query.model,
+        'vehicleQuotations.modelYear' : parseInt(req.query.modelYear)
+    }).select('fantasyName email phone cnpj fabricationMonthYearPercentage vehicleQuotations.$')
+    .lean().exec( (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            result.forEach(item => {
+                let years = 2018 - new Date(req.query.fabricationDate).getFullYear();
+                 item.vehicleQuotations
+                let currentPrice = item.vehicleQuotations[0].price;
+                console.log(years);
+                console.log(item.fabricationMonthYearPercentage);
+                console.log(currentPrice);
+                item.vehicleQuotations[0].price = 
+                ((years * item.fabricationMonthYearPercentage / 100) * currentPrice) + currentPrice;
+            });
+            res.json(result);
+        }
+    });
+});
+
+/*router.route('/vehicles').get((req, res) => {
     Vehicle.find((err, vehicles) => {
         if (err)
             console.log(err);
@@ -72,7 +98,7 @@ router.route('/vehicles/delete/:id').delete((req, res) => {
         else
             res.json('Remove successfully');
     })
-})
+})*/
 
 
 app.use('/', router);
