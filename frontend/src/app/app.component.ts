@@ -21,8 +21,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.vehicle = new Vehicle();
-    $('.datepicker').click(false);
 
+    $(document).ready(function() {
+      $("html,body").animate({scrollTop: 0}, 100);
+    });
+    
     $(document).ready(function () {
       $('.parallax').parallax();
       $('.datepicker').datepicker({
@@ -31,24 +34,37 @@ export class AppComponent implements OnInit {
     });
 
     if (this.insuranceCompanyOffers == null) {
-      $('.quotations').hide();
+      $('#offers').hide();
     }
   }
 
-  openDatePicker(event) {
+  openDatePicker() {
     M.Datepicker.getInstance(document.getElementById('vehicle_fabrication_date')).open();
   }
 
   loadOffers() {
-    let datestring = $('.datepicker').val().split('-');
-    this.vehicle.fabricationDate = new Date(datestring[1], datestring[0]);
-    alert(this.vehicle.fabricationDate);
-    this.insurancePayService.getInsuranceCompanyOffers(this.vehicle).subscribe(
-      data => {
-        this.insuranceCompanyOffers = data;
-      });
-      
-      $('.quotations').show();
-
+    if ($('.datepicker').val() != '') {
+      let datestring = $('.datepicker').val().split('-');
+      this.vehicle.fabricationDate = new Date(datestring[1], datestring[0]);
+      this.insurancePayService.getInsuranceCompanyOffers(this.vehicle).subscribe(
+        data => {
+          if (data.length > 0) {
+            this.insuranceCompanyOffers = data;
+            $('#offers').show();
+            $('html,body').animate({
+              scrollTop: $("#offers").offset().top
+            }, 1000);
+          } else {
+            M.toast({ html: 'Oh, sorry. No offer was found for your vehicle :c', classes: 'green rounded' });
+            $('#offers').hide();
+          }
+        });
+    } else {
+      M.toast({ html: 'Please, provide the vehicle fabrication date', classes: 'red rounded' });
+    }
+  }
+  
+  chooseOffer(offerId) {
+    alert(offerId);
   }
 }
