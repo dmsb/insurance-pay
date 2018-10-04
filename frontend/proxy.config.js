@@ -1,6 +1,6 @@
 const proxy = [
     {
-      context: '/',
+      context: '/insurancepayproject',
       target: 'http://localhost:4000'
       //pathRewrite: {'^/api' : ''}
     }

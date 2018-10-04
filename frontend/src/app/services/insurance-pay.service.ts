@@ -11,14 +11,11 @@ declare var M: any;
 })
 export class InsurancepayService {
 
-  uri = "http://localhost:4000";
+  uri = "http://localhost:4000/insurancepayproject";
 
   constructor(private httpClient: HttpClient,
     private router: Router) { }
 
-  getVehicles() {
-    return this.httpClient.get<Vehicle>(`${this.uri}/vehicles`);
-  }
   //exampl: http://localhost:4000/insurance_companies?brand=FIAT&model=UNO MILE FIRE&modelYear=2005&fabricationDate=2016-05-24T04:18:38.000Z
   getInsuranceCompanyOffers(vehicle: Vehicle) {
     let paramsData = {
@@ -29,10 +26,6 @@ export class InsurancepayService {
     };
     
     return this.httpClient.get<InsuranceCompany[]>(`${this.uri}/insurance_companies`, {params: paramsData});
-  }
-
-  getVehiclesById(id) {
-    return this.httpClient.get<Vehicle>(`${this.uri}/vehicles`);
   }
 
   getContracts() {

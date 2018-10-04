@@ -3,6 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import InsuranceCompany from './models/InsuranceCompany';
+import InsuranceContract from './models/InsuranceContract';
 
 const app = express();
 const router = express.Router();
@@ -17,8 +18,7 @@ connection.once('open', () => {
     console.log('MongoDB database connection established successfully!');
 });
 
-//http://localhost:4000/insurance_companies?brand=FIAT&model=UNO MILE FIRE&modelYear=2005
-router.route('/insurance_companies').get((req, res) => {
+router.route('/insurancepayproject/insurance_companies').get((req, res) => {
     InsuranceCompany.find({ 
         'vehicleQuotations.brand' : req.query.brand,
         'vehicleQuotations.model' : req.query.model,
@@ -32,9 +32,6 @@ router.route('/insurance_companies').get((req, res) => {
                 let years = 2018 - new Date(req.query.fabricationDate).getFullYear();
                  item.vehicleQuotations
                 let currentPrice = item.vehicleQuotations[0].price;
-                console.log(years);
-                console.log(item.fabricationMonthYearPercentage);
-                console.log(currentPrice);
                 item.vehicleQuotations[0].price = 
                 ((years * item.fabricationMonthYearPercentage / 100) * currentPrice) + currentPrice;
             });
@@ -43,46 +40,37 @@ router.route('/insurance_companies').get((req, res) => {
     });
 });
 
-/*router.route('/vehicles').get((req, res) => {
-    Vehicle.find((err, vehicles) => {
-        if (err)
-            console.log(err);
-        else
-            res.json(vehicles);
-    });
-});
-
-router.route('/vehicles/:id').get((req, res) => {
-    Vehicle.findById(req.params.id, (err, vehicle) => {
-        if (err)
-            console.log(err);
-        else
-            res.json(vehicle);
-    });
-});
-
-router.route('/vehicles/add').post((req, res) => {
-    let vehicle = new Vehicle(req.body);
-    vehicle.save()
-        .then(vehicle => {
-            res.status(200).json({'vehicle': 'Added successfully'});
+router.route('/insurancepayproject/contract/add').post((req, res) => {
+    let contract = new InsuranceContract(req.body);
+    contract.save()
+        .then(contract => {
+            res.status(200).json({'contract': 'Added successfully'});
         })
         .catch(err => {
             res.status(400).send('Failed to create new record');
         });
 });
 
-router.route('/vehicles/update/:id').put((req, res) => {
-    Vehicle.findById(req.params.id, (err, vehicle) => {
-        if (!vehicle)
+router.route('/insurancepayproject/contract/delete/:id').delete((req, res) => {
+    InsuranceContract.findByIdAndRemove({_id: req.params.id}, (err, result) => {
+        if (err)
+            res.json(err);
+        else
+            res.json('Remove successfully');
+    });
+});
+
+router.route('/insurancepayproject/contract/update/:id').put((req, res) => {
+    InsuranceContract.findById(req.params.id, (err, contract) => {
+        if (!contract)
             return next(new Error('Could not load document'));
         else {
-            vehicle.brand = req.body.brand;
-            vehicle.fabricationDate = req.body.fabricationDate;
-            vehicle.modelYear = req.body.modelYear;
-            vehicle.model = req.body.model;
+            contract.brand = req.body.brand;
+            contract.fabricationDate = req.body.fabricationDate;
+            contract.modelYear = req.body.modelYear;
+            contract.model = req.body.model;
 
-            vehicle.save().then(vehicle => {
+            contract.save().then(contract => {
                 res.json('Update done');
             }).catch(err => {
                 res.status(400).send('Update failed');
@@ -90,16 +78,6 @@ router.route('/vehicles/update/:id').put((req, res) => {
         }
     });
 });
-
-router.route('/vehicles/delete/:id').delete((req, res) => {
-    Vehicle.findByIdAndRemove({_id: req.params.id}, (err, vehicle) => {
-        if (err)
-            res.json(err);
-        else
-            res.json('Remove successfully');
-    })
-})*/
-
 
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));

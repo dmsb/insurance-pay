@@ -76,6 +76,52 @@ db.getCollection("insurance_company").insert({
     ]
 });
 
+db.getCollection("insurance_contract").insert({ 
+  	"insuranceCompany" : {
+  	"fantasyName" : "Company 1", 
+  	"email" : "company1@gmail.com",
+    "phone": "5581993566788",
+    "headOfficeCity": "Recife",
+    "neighborhood": "Jordão",
+    "zipcode": "77060814",
+    "state": "PE",
+    "cnpj": "64467552000197",
+    "stateRegistration": "AA4568",
+    "directorName": "Diogo",
+    "directorNationality": "Brasileiro",
+    "directorMaritalState": "Solteiro",
+    "directorProfission": "Empresário",
+    "directorRg" : "551155668",
+    "directorCpf" : "36082404033",
+    "directorZipCode": "77060814",
+    "directorCity": "Recife",
+    "directorState": "PE",
+    "directorCountry": "Brasil"
+  	}, 
+  	"vehicle" : {
+  		"brand": "FIAT",
+    	"modelYear": "Date",
+	    "model": "UNO",
+	    "plate": "AAA5268"
+  	},
+    "deadLineForAccidents": 2,
+    "contractCoverageInMonths": 1,
+    "price": 568.62,
+    "policyHolderFullName": "Diogo Muniz",
+    "policyHolderRg": "77060814",
+    "policyHolderCpf": "107194988853",
+    "policyHolderEmail": "diogo@gmail.com",
+    "policyHolderCell": "819933558",
+    "policyHolderCodeZip": "5223330",
+    "policyHolderNumber": "215",
+    "policyHolderComplement": "AAA",
+    "policyHolderNeighborhood": "Empresário",
+    "policyHolderCity" : "RECIFE",
+    "policyHolderState" : "PE",
+    "policyHolderNationality": "BR",
+    "policyHolderGender": "M"
+});
+
 ###
 db.insurance_company.find( 
 { "vehicle_quotations.brand": "FIAT" }, 
@@ -89,4 +135,102 @@ db.insurance_company.find(
   "cnpj": 1,
   "stateRegistration": 1,
   "vehicle_quotations.$meta": 1 } )
+
+db.createCollection("insurance_company", {
+   validator: {
+      $jsonSchema: {
+         bsonType: "object",
+         required: [ "fantasyName", "email", "phone", "cnpj", "fabricationMonthYearPercentage" ],
+         properties: {
+            fantasyName: {
+               bsonType: "string",
+               description: "must be a string and is required"
+            },
+            email: {
+               bsonType: "string",
+               description: "must be a string and is required"
+            },
+            phone: {
+               bsonType: "string",
+               description: "must be a string and is required"	
+            },
+            cnpj: {
+               bsonType: "string",
+               description: "must be a string and is required"	
+            },
+            fabricationMonthYearPercentage: {
+               bsonType: "int",
+               minimum: 0,
+               maximum: 100,
+               exclusiveMaximum: false,
+               description: "must be an integer in [ 0, 100 ] and is required"
+            },
+            headOfficeCity : {
+                bsonType: "string",
+                description: "must be a string and is not required"	
+            },
+            neighborhood : {
+                bsonType: "string",
+                description: "must be a string and is not required"	
+            },
+            zipcode : {
+                bsonType: "string",
+                description: "must be a string and is not required"	
+            },
+            state : {
+                bsonType: "string",
+                description: "must be a string and is not required"	
+            },
+            stateRegistration : {
+                bsonType: "string",
+                description: "must be a string and is not required"	
+            },
+            directorName : {
+                bsonType: "string",
+                description: "must be a string and is not required"	
+            },
+            directorNationality : {
+                bsonType: "string",
+                description: "must be a string and is not required"	
+            },
+            directorMaritalState : {
+                bsonType: "string",
+                description: "must be a string and is not required"	
+            },
+            directorProfission : {
+                bsonType: "string",
+                description: "must be a string and is not required"	    
+            },
+            directorRg: {
+                bsonType: "string",
+                description: "must be a string and is not required"	
+            },
+            directorCpf: {
+                bsonType: "string",
+                description: "must be a string and is not required"	
+            },
+            directorZipCode: {
+                bsonType: "string",
+                description: "must be a string and is not required"	
+            },
+            directorCity: {
+                bsonType: "string",
+                description: "must be a string and is not required"	
+            },
+            directorState: {
+                bsonType: "string",
+                description: "must be a string and is not required"	
+            },
+            directorCountry: {
+                bsonType: "string",
+                description: "must be a string and is not required"	
+            },
+            vehicleQuotations: {
+               bsonType: "object",
+               description: "must be a object and is not required"	
+            }
+         }
+      }
+   }
+});
 

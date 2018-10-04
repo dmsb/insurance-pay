@@ -34,10 +34,10 @@ let Vehicle = new Schema({
 let InsuranceContract = new Schema({
     insuranceCompany: InsuranceCompany,
     vehicle: Vehicle,
+    price: Number,
     
     deadLineForAccidents: Number,
     contractCoverageInMonths: Number,
-    price: Number,
 
     policyHolderFullName: String,
     policyHolderRg: String,
