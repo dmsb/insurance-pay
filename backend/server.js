@@ -40,6 +40,16 @@ router.route('/insurancepayproject/insurance_companies').get((req, res) => {
     });
 });
 
+router.route('/insurancepayproject/contracts').get((req, res) => {
+    InsuranceContract.find({}).lean().exec((err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(result);
+        }
+    });
+});
+
 router.route('/insurancepayproject/contracts/add').post((req, res) => {
     let contract = new InsuranceContract(req.body);
     contract.save()
@@ -65,13 +75,14 @@ router.route('/insurancepayproject/contracts/update/:id').put((req, res) => {
         if (!contract)
             return next(new Error('Could not load document'));
         else {
-            contract.brand = req.body.brand;
-            contract.fabricationDate = req.body.fabricationDate;
-            contract.modelYear = req.body.modelYear;
-            contract.model = req.body.model;
-
-            contract.save().then(contract => {
-                res.json('Update done');
+            contract.policyHolderFullName = req.body.policyHolderFullName;
+            contract.policyHolderCpf = req.body.policyHolderCpf;
+            contract.policyHolderEmail = req.body.policyHolderEmail;
+            contract.policyHolderCell = req.body.policyHolderCell;
+            
+            let insuranceContract = new InsuranceContract(contract);
+            insuranceContract.save().then(contract => {
+                res.json({'contract': 'Updated successfully'});
             }).catch(err => {
                 res.status(400).send('Update failed');
             });

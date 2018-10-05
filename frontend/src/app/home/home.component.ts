@@ -3,6 +3,7 @@ import { Vehicle } from '../model/vehicle';
 import { InsuranceCompany } from '../model/InsuranceCompany';
 import { InsurancepayService } from '../services/insurance-pay.service';
 import { InsuranceContract } from '../model/InsuranceContract';
+import { Router } from '@angular/router';
 declare var $: any;
 declare var M: any;
 
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
   selectedOffer: InsuranceCompany;
   contract: InsuranceContract;
 
-  constructor(private insurancePayService: InsurancepayService) {
+  constructor(private insurancePayService: InsurancepayService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -54,6 +56,10 @@ export class HomeComponent implements OnInit {
     this.contract.vehicle = this.vehicle;
     this.contract.insuranceCompany = this.selectedOffer;
     this.insurancePayService.addContract(this.contract);
+  }
+
+  listContracts() {
+    this.router.navigate(['/contracts']);
   }
 
   loadOffers() {

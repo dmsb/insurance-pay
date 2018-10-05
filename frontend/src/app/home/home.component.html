@@ -12,7 +12,9 @@
 <body>
     <app-header></app-header>
     <div class="parallax-container">
-        <div class="parallax"><img src="../assets/img/homem-branco-carro.jpg"></div>
+        <div class="parallax"><img src="../assets/img/homem-branco-carro.jpg">
+        </div>
+        <a class="waves-effect waves-light btn-large" (click)="listContracts()"><i class="material-icons left">view_list</i>Show Contracts</a>
     </div>
     <div class="section white">
         <div class="container">
@@ -98,7 +100,6 @@
         </div>
     </div>
 
-    <!-- Modal Structure -->
     <div id="modal1" class="modal">
         <div class="modal-content">
             <h4>Insurance Informations</h4>

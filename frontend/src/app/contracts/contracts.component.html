@@ -11,13 +11,66 @@
 
 <body>
   <app-header></app-header>
-  <div class="collection">
-      <a href="#!" class="collection-item">Alvin</a>
-      <a href="#!" class="collection-item active">Alvin</a>
-      <a href="#!" class="collection-item">Alvin</a>
-      <a href="#!" class="collection-item">Alvin</a>
+  <div class="section white">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 offset-s4"><span class="flow-text">Contract Id's</span></div>
+      </div>
+      <div class="row">
+        <ul class="collection" *ngFor="let contract of contracts">
+          <li class="collection-item"><a class="waves-effect waves-light btn modal-trigger" href="#modal2" (click)="setCurrentContract(contract)">{{contract._id}}</a></li>
+        </ul>
+      </div>
     </div>
+  </div>
   <app-footer></app-footer>
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <h4>Contract </h4>
+    </div>
+    <div class="modal-footer">
+      <form>
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="full_name" type="text" class="validate" required="required" [(ngModel)]="currentContract.policyHolderFullName"
+              [ngModelOptions]="{standalone: true}">
+            <label class="active" for="full_name">Your Full Name</label>
+            <span class="helper-text" data-error="required"></span>
+          </div>
+          <div class="input-field col s6">
+            <input id="cpf" type="text" class="validate" required="required" [(ngModel)]="currentContract.policyHolderCpf"
+              [ngModelOptions]="{standalone: true}">
+            <label for="cpf">CPF</label>
+            <span class="helper-text" data-error="required"></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="email" type="text" class="validate" required="required" [(ngModel)]="currentContract.policyHolderEmail"
+              [ngModelOptions]="{standalone: true}">
+            <label for="email">Email</label>
+            <span class="helper-text" data-error="required"></span>
+          </div>
+          <div class="input-field col s6">
+            <input id="policy_holder_cell" type="text" class="validate" required="required" [(ngModel)]="currentContract.policyHolderCell"
+              [ngModelOptions]="{standalone: true}">
+            <label for="policy_holder_cell">Cell</label>
+            <span class="helper-text" data-error="required"></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s4">
+            <a class="modal-close waves-effect waves-light btn-large" (click)="edit()">
+              <i class="material-icons left">update</i>Edit</a>
+          </div>
+          <div class="col s6">
+              <a class="modal-close waves-effect waves-light btn-large" (click)="delete()">
+                <i class="material-icons left">delete_forever</i>Delete</a>
+            </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 
 </html>
