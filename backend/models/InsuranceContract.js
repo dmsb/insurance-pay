@@ -26,6 +26,7 @@ let InsuranceCompany = new Schema({
 
 let Vehicle = new Schema({
     brand: String,
+    fabricationDate: Date,
     modelYear: Date,
     model: String,
     plate: String

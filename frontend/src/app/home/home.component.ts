@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Vehicle } from '../model/vehicle';
 import { InsuranceCompany } from '../model/InsuranceCompany';
 import { InsurancepayService } from '../services/insurance-pay.service';
+import { InsuranceContract } from '../model/InsuranceContract';
 declare var $: any;
 declare var M: any;
 
@@ -14,12 +15,15 @@ export class HomeComponent implements OnInit {
 
   vehicle: Vehicle;
   insuranceCompanyOffers: InsuranceCompany[];
+  selectedOffer: InsuranceCompany;
+  contract: InsuranceContract;
 
   constructor(private insurancePayService: InsurancepayService) {
   }
 
   ngOnInit() {
     this.vehicle = new Vehicle();
+    this.contract = new InsuranceContract();
 
     $(document).ready(function() {
       $("html,body").animate({scrollTop: 0}, 100);
@@ -30,6 +34,7 @@ export class HomeComponent implements OnInit {
       $('.datepicker').datepicker({
         format: 'mm-yyyy'
       });
+      $('.modal').modal();
     });
 
     if (this.insuranceCompanyOffers == null) {
@@ -39,6 +44,16 @@ export class HomeComponent implements OnInit {
 
   openDatePicker() {
     M.Datepicker.getInstance(document.getElementById('vehicle_fabrication_date')).open();
+  }
+
+  setSelectedOffer(offer: InsuranceCompany) {
+    this.selectedOffer = offer;
+  }
+
+  pay() {
+    this.contract.vehicle = this.vehicle;
+    this.contract.insuranceCompany = this.selectedOffer;
+    this.insurancePayService.addContract(this.contract);
   }
 
   loadOffers() {
@@ -61,10 +76,6 @@ export class HomeComponent implements OnInit {
     } else {
       M.toast({ html: 'Please, provide the vehicle fabrication date', classes: 'red rounded' });
     }
-  }
-  
-  chooseOffer(offerId) {
-    alert(offerId);
   }
 
 }

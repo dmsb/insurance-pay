@@ -23,35 +23,36 @@
                 <form class="col s12">
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="vehicle_brand" type="text" class="validate" required="required"
-                            [(ngModel)]="vehicle.brand" [ngModelOptions]="{standalone: true}">
+                            <input id="vehicle_brand" type="text" class="validate" required="required" [(ngModel)]="vehicle.brand"
+                                [ngModelOptions]="{standalone: true}">
                             <label for="vehicle_brand">Vehicle Brand</label>
                             <span class="helper-text" data-error="required" data-success="Thank's for improve this!"></span>
                         </div>
                         <div class="input-field col s6">
-                            <input id="vehicle_model" type="text" class="validate" required="required"
-                            [(ngModel)]="vehicle.model" [ngModelOptions]="{standalone: true}">
+                            <input id="vehicle_model" type="text" class="validate" required="required" [(ngModel)]="vehicle.model"
+                                [ngModelOptions]="{standalone: true}">
                             <label for="vehicle_model">Vehicle Model</label>
                             <span class="helper-text" data-error="required" data-success="Bravo \o/"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="vehicle_fabrication_date" type="text" class="datepicker"
-                            required="required" (focus)="openDatePicker()">
+                            <input id="vehicle_fabrication_date" type="text" class="datepicker" required="required"
+                                (focus)="openDatePicker()">
                             <label for="vehicle_fabrication_date">Vehicle Fabrication Date</label>
                             <span class="helper-text" data-error="required" data-success="It's all right!"></span>
                         </div>
                         <div class="input-field col s6">
-                            <input id="vehicle_model_year" type="number" class="validate"  required="required"
-                            [(ngModel)]="vehicle.modelYear" [ngModelOptions]="{standalone: true}">
+                            <input id="vehicle_model_year" type="number" class="validate" required="required"
+                                [(ngModel)]="vehicle.modelYear" [ngModelOptions]="{standalone: true}">
                             <label for="vehicle_model_year">Vehicle Model Year</label>
                             <span class="helper-text" data-error="required" data-success="It's valid:)"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s12">
-                            <a id="search-offers" class="waves-effect waves-light btn-large" (click)="loadOffers()"><i class="material-icons left">monetization_on</i>Search Offers</a>
+                            <a id="search-offers" class="waves-effect waves-light btn-large" (click)="loadOffers()"><i
+                                    class="material-icons left">monetization_on</i>Search Offers</a>
                         </div>
                     </div>
                 </form>
@@ -87,13 +88,59 @@
                                 <td>{{offer.email}}</td>
                                 <td>{{offer.phone}}</td>
                                 <td>{{offer.vehicleQuotations[0].price}}</td>
-                                <td><a class="waves-effect waves-light btn" (click)="chooseOffer(offer._id)">
-                                    <i class="material-icons">done</i></a></td>
+                                <td><a class="waves-effect waves-light btn modal-trigger" href="#modal1" (click)="setSelectedOffer(offer)">
+                                        <i class="material-icons">done</i></a></td>
                             </tr>
                         </tbody>
                     </table>
                 </form>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Insurance Informations</h4>
+            <p>Create contract</p>
+        </div>
+        <div class="modal-footer">
+            <form>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="full_name" type="text" class="validate" required="required" [(ngModel)]="contract.policyHolderFullName"
+                            [ngModelOptions]="{standalone: true}">
+                        <label for="full_name">Your Full Name</label>
+                        <span class="helper-text" data-error="required"></span>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="cpf" type="text" class="validate" required="required" [(ngModel)]="contract.policyHolderCpf"
+                            [ngModelOptions]="{standalone: true}">
+                        <label for="cpf">CPF</label>
+                        <span class="helper-text" data-error="required"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="email" type="text" class="validate" required="required" [(ngModel)]="contract.policyHolderEmail"
+                        [ngModelOptions]="{standalone: true}">
+                        <label for="email">Email</label>
+                        <span class="helper-text" data-error="required"></span>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="policy_holder_cell" type="text" class="validate" required="required" [(ngModel)]="contract.policyHolderCell"
+                            [ngModelOptions]="{standalone: true}">
+                        <label for="policy_holder_cell">Cell</label>
+                        <span class="helper-text" data-error="required"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <a class=" waves-effect waves-light btn-large" (click)="pay()">
+                        <i class="material-icons left">monetization_on</i>Pay</a>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <app-footer></app-footer>

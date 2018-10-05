@@ -33,14 +33,17 @@ export class InsurancepayService {
   }
 
   addContract(insuranceContract: InsuranceContract) {
-    return this.httpClient.post(`${this.uri}/contracts`, insuranceContract);
+    return this.httpClient.post(`${this.uri}/contracts/add`, insuranceContract).subscribe(
+      err => M.toast({ html: 'Invalid credentials!', classes: 'blue rounded' }));
   }
 
   updateContract(insuranceContract: InsuranceContract) {
-    return this.httpClient.put(`${this.uri}/contracts/${insuranceContract._id}`, insuranceContract);
+    return this.httpClient.put(`${this.uri}/contracts/${insuranceContract._id}`, insuranceContract).subscribe(
+      err => M.toast({ html: 'Invalid credentials!', classes: 'blue rounded' }));;
   }
 
   deleteContract(id) {
-    return this.httpClient.delete(`${this.uri}/contracts/${id}`, id);
+    return this.httpClient.delete(`${this.uri}/contracts/${id}`, id).subscribe(
+      err => M.toast({ html: 'Invalid credentials!', classes: 'blue rounded' }));;
   }
 }

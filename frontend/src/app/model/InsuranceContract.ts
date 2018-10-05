@@ -1,11 +1,36 @@
 import { Identification } from "./Identification";
-import { VehicleQuotation } from "./VehicleQuotation";
+import { Vehicle } from "./vehicle";
+
+class InsuranceCompany {
+    fantasyName: String;
+    email: String;
+    phone: String;
+    headOfficeCity: String;
+    neighborhood: String;
+    zipcode: String;
+    state: String;
+    cnpj: String;
+    stateRegistration: String;
+    directorName: String;
+    directorNationality: String;
+    directorMaritalState: String;
+    directorProfission: String;
+    directorRg: String;
+    directorCpf: String;
+    directorZipCode: String;    
+    directorCity: String;
+    directorState: String;
+    directorCountry: String;
+}
 
 export class InsuranceContract extends Identification {
+
+    insuranceCompany: InsuranceCompany;
+    vehicle: Vehicle;
+    price: Number;
+
     deadLineForAccidents: Number;
     contractCoverageInMonths: Number;
-
-    vehicleCotation: VehicleQuotation;
 
     policyHolderFullName: String;
     policyHolderRg: String;
@@ -29,5 +54,5 @@ export class InsuranceContract extends Identification {
     policyHolderExistsPeaples1824: String;
     policyHolderPeapleGender: String;
     policyHolderHomeType: String; 
-    policyHolderProfession: String
+    policyHolderProfession: String;
 }

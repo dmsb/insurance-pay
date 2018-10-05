@@ -40,7 +40,7 @@ router.route('/insurancepayproject/insurance_companies').get((req, res) => {
     });
 });
 
-router.route('/insurancepayproject/contract/add').post((req, res) => {
+router.route('/insurancepayproject/contracts/add').post((req, res) => {
     let contract = new InsuranceContract(req.body);
     contract.save()
         .then(contract => {
@@ -51,7 +51,7 @@ router.route('/insurancepayproject/contract/add').post((req, res) => {
         });
 });
 
-router.route('/insurancepayproject/contract/delete/:id').delete((req, res) => {
+router.route('/insurancepayproject/contracts/delete/:id').delete((req, res) => {
     InsuranceContract.findByIdAndRemove({_id: req.params.id}, (err, result) => {
         if (err)
             res.json(err);
@@ -60,7 +60,7 @@ router.route('/insurancepayproject/contract/delete/:id').delete((req, res) => {
     });
 });
 
-router.route('/insurancepayproject/contract/update/:id').put((req, res) => {
+router.route('/insurancepayproject/contracts/update/:id').put((req, res) => {
     InsuranceContract.findById(req.params.id, (err, contract) => {
         if (!contract)
             return next(new Error('Could not load document'));
